@@ -1,0 +1,39 @@
+server:
+  port: 8888
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: default
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/badminton?currentSchema=manage_bmt&reWriteBatchedInserts=true}
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:123123}
+    hikari:
+      idle-timeout: ${HIKARY_IDLE_TIMEOUT:2400000}
+      maximum-pool-size: ${HIKARY_POOL_SIZE:100}
+      minimum-idle: ${HIKARY_MIN_IDLE:10}
+      max-lifetime: ${HIKARY_MAX_LIFETIME:2400000}
+      connection-timeout: ${HIKARY_CONNECTION_TIMEOUT:2400000}
+  jpa:
+    properties:
+      export-limit: 2000
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: false
+        hbm2ddl:
+          auto: update
+        default_schema: manage_bmt
+        jdbc:
+          batch_size: 2500
+openapi:
+  url:
+    local-url: http://localhost:8888
+  info:
+    title: Demo
+    version: 1.0
+    description: This API exposes endpoints to manage demo
+  license:
+    name: MIT License
+    url: gts.com.vn
